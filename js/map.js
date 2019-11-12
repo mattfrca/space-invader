@@ -1,0 +1,87 @@
+var map = {
+  models: {
+    squid: [
+      '---------',
+      '--xxxxx--',
+      '--x8x8x--',
+      '-xxxxxxx-',
+      '--x-x-x--',
+      '-x--x--x-',
+      '---------',
+    ],
+    crab: [
+      '---------',
+      '---x-x---',
+      '--xxxxx--',
+      '--xoxox--',
+      '-xxxxxxx-',
+      '-x-x-x-x-',
+      '---------'
+    ],
+    space: [
+      '-----------',
+      '----x-x----',
+      '---xxxxx---',
+      '--xx-x-xx--',
+      '---xoxox---',
+      '--xxxxxxx--',
+      '-x-x---x-x-',
+      '----x-x----',
+      '-----------',
+    ],
+    ghost: [
+      '----------------',
+      '------oooo------',
+      '----oooooooo----',
+      '---oooooooooo---',
+      '--ooo--oooo--o--',
+      '--oo----oo------',
+      '--oo--88oo--88--',
+      '-ooo--88oo--88o-',
+      '-oooo--oooo--oo-',
+      '-oooooooooooooo-',
+      '-oooooooooooooo-',
+      '-oooooooooooooo-',
+      '-oooooooooooooo-',
+      '-oo-ooo--ooo-oo-',
+      '-o---oo--oo---o-',
+      '----------------',
+    ],
+    deadhead: [
+      '---------',
+      '-x-xxx-x-',
+      '--xxxxx--',
+      '--xoxox--',
+      '--xxxxx--',
+      '-x-xxx-x-',
+      '---------'
+    ],
+    myth: [
+      '-------------',
+      '---x-----x---',
+      '----x---x----',
+      '---xxxxxxx---',
+      '--xx-xxx-xx--',
+      '-xxxxxxxxxxx-',
+      '-x-xxxxxxx-x-',
+      '-x-x-----x-x-',
+      '----xx-xx----',
+      '-------------',
+    ],
+    ship: [
+      '-----x-----',
+      '----xxx----',
+      '----xox----',
+      '---xx8xx---',
+      'xxxxxxxxxxx',
+      '-xxxxxxxxx-',
+      '---x---x---'
+    ]
+  },
+  types: {
+    '-': 'empty',
+    'x': 'plain',
+    'o': 'light',
+    '8': 'highlight',
+  }
+};
