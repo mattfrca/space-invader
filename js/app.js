@@ -5,10 +5,10 @@ const app = {
 
     init: function(){
         //On lance le menu
-        menu.init();
+        //menu.init();
 
         //A SUPRIMER:
-        //app.startGame();
+        app.startGame();
     },
 
     startGame:function(){

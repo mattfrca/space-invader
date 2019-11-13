@@ -4,23 +4,56 @@ const game = {
     ennemy: [],
     ship: [],
 
+    gauche: false,
+    droite: false,
+
     init: function(){
-        console.log("Jeu correctement lancé");
         // C'est ici qu'on commence à coder notre jeu.
-        document.addEventListener('keyup', game.moveTheShip);
-        god.createElement("ship", 450, 50);
+        document.addEventListener('keyup', game.handleKeyUp);
+        document.addEventListener('keydown', game.handleKeydown);
+        god.createElement("ship", 450, 150);
+        //Créer ici les éléments
+        setInterval(game.handleTime, 20);
     },
-    moveTheShip: function(e) {
-        let unitWrapper = document.getElementsByClassName('unitWrapper')[0];
-        let posUnitWrapper = unitWrapper.style.cssText;
-        console.log(posUnitWrapper);
-        if(e.keyCode === 37) {
-            unitWrapper.style.right -= 5;
-            console.log('gauche pressée');
+
+    handleTime:function(){
+        //Coeur de notre jeux
+        game.moveTheShip();
+
+    },
+
+    moveTheShip: function() {
+        let unitWrapper = document.getElementsByClassName('ship');
+        
+        if(game.droite){
+            console.log("vaisseau droite");
         }
-        if(e.keyCode === 39) {
-            unitWrapper.style.right += 5;
-            console.log('droite pressée');
+        if(game.gauche){
+            console.log("vaisseau gauche");
+        }
+    },
+
+    handleKeydown: function(evt){
+        switch(evt.keyCode){
+            case 37:
+            game.gauche = true;
+            break;
+
+            case 39:
+            game.droite = true;
+            break;
+        }
+    },
+
+    handleKeyUp: function(evt){
+        switch(evt.keyCode){
+            case 37:
+            game.gauche = false;
+            break;
+
+            case 39:
+            game.droite = false;
+            break;
         }
     }
 };

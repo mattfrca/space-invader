@@ -34,7 +34,7 @@ const god = {
             }
         }
 
-        element = [unit, posX, posY];
+        element = [posX, posY, unit];
 
         return element;
     },
