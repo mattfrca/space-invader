@@ -30,7 +30,7 @@ const game = {
     },
 
     moveTheShip: function() {
-        let unitWrapper = document.getElementsByClassName('unitWrapper')[0];
+        let unitWrapper = document.getElementsByClassName('ship')[0];
         if(game.droite && game.ship[0] >= 10){
             app.panel.removeChild(unitWrapper);
             game.ship[0] -= this.vitesse;

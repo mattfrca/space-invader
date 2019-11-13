@@ -9,7 +9,7 @@ const god = {
         for (model in map.models){
             if (model === unit){
                 let unitWrapper = document.createElement('div');
-                unitWrapper.className = "unitWrapper"
+                unitWrapper.className = "unitWrapper " + unit; 
                 unitWrapper.style.width = god.modelWidth(unit)* app.pixel + "px";
                 unitWrapper.style.height = god.modelHeight(unit)* app.pixel + "px";
                 unitWrapper.style.right = posX + "px";
