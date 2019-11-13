@@ -15,7 +15,7 @@
     border-radius: 5px;
     width: 900px;
     height: 600px;
-    background-color: black;
+    background-color: rgb(8, 8, 78);
     resize: none;
     position: relative;
 }

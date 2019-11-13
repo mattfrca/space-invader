@@ -29,7 +29,7 @@ const god = {
                     }
                 }
 
-                if (unit !== "ship"){
+                if (unit !== "ship" && unit !== "missile"){
                     game.ennemy.push(element);
                     unitWrapper.id = game.ennemy.length;
                 }

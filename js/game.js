@@ -8,7 +8,8 @@ const game = {
 
     gauche: false,
     droite: false,
-    vitesse: 10,
+    vitesse: 12,
+    vitesseEnnemy: 2,
 
     init: function(){
         // C'est ici qu'on commence à coder notre jeu.
@@ -27,35 +28,67 @@ const game = {
         //Coeur de notre jeux
         game.moveTheShip();
         game.moveEnnemy();
-        // game.missileShip();
+         game.missileShip();
 
     },
 
-    // missileShip: function() {
-    //     god.createElement('missile', game.ship[0] + 25, game.ship[1]-20);
-    // },
+     missileShip: function() {
+         let missile = document.getElementsByClassName('missile')[0];
+         posXMissile = game.ship[0];
+         posYMissile = game.ship[1];
+         god.createElement('missile', posXMissile + 30, posYMissile - 20);
+     },
 
     moveTheShip: function() {
         let unitWrapper = document.getElementsByClassName('ship')[0];
         if(game.droite && game.ship[0] >= 10){
-            app.panel.removeChild(unitWrapper);
-            game.ship[0] -= this.vitesse;
-            god.createElement("ship", game.ship[0], 555);
+            game.ship[0] -= game.vitesse;
+            unitWrapper.style.right = game.ship[0]+ "px";
         }
         if(game.gauche && game.ship[0] <= 830){
-            app.panel.removeChild(unitWrapper);
-            game.ship[0] += this.vitesse;
-            god.createElement("ship", game.ship[0], 555);
+            game.ship[0] += game.vitesse;
+            unitWrapper.style.right = game.ship[0] + "px";
+
         }
         
     },
 
     moveEnnemy:function(){
+        let posXMax = 0;
+        let posXMin = 900;
 
-        // for(var i = 1; i < game.ennemy.length +1; i+=1){
-        //      let unit = document.getElementById(i);
-        //      app.panel.removeChild(unit);
-        // }
+        for(var i = 1; i < game.ennemy.length +1; i+=1){
+              let unit = document.getElementById(i);
+              game.ennemy[i-1][0] += game.vitesseEnnemy;
+              unit.style.right = game.ennemy[i-1][0] + "px";
+
+              if(posXMax < game.ennemy[i-1][0]){
+                  posXMax = game.ennemy[i-1][0];
+              }
+
+              if(posXMin > game.ennemy[i-1][0]){
+                  posXMin = game.ennemy[i-1][0];
+              }
+        }
+
+        if(posXMin < 15){
+            game.vitesseEnnemy *=-1;
+
+            for(var i = 1; i < game.ennemy.length +1; i+=1){
+                    let unit = document.getElementById(i);
+                    game.ennemy[i-1][1] += 10;
+                    unit.style.top = game.ennemy[i-1][1] + "px";
+            }
+          }
+
+          if(posXMax > 820){
+            game.vitesseEnnemy *=-1;
+            for(var i = 1; i < game.ennemy.length +1; i+=1){
+                let unit = document.getElementById(i);
+                game.ennemy[i-1][1] += 10;
+                unit.style.top = game.ennemy[i-1][1] + "px";
+            }
+          }
     },
 
     handleKeydown: function(evt){
