@@ -27,13 +27,13 @@ const game = {
         //Coeur de notre jeux
         game.moveTheShip();
         game.moveEnnemy();
-        game.missileShip();
+        // game.missileShip();
 
     },
 
-    missileShip: function() {
-        god.createElement('missile', game.ship[0] + 25, game.ship[1]-20);
-    },
+    // missileShip: function() {
+    //     god.createElement('missile', game.ship[0] + 25, game.ship[1]-20);
+    // },
 
     moveTheShip: function() {
         let unitWrapper = document.getElementsByClassName('ship')[0];
