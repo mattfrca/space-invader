@@ -49,7 +49,6 @@ const menu = {
 
         if(menu.startTitleSize < 0){
             panel.removeChild(menu.startTitle);
-
             if(document.querySelector('.fullScreen')){
                 panel.removeChild(menu.fullScreen);
             }

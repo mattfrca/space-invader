@@ -6,11 +6,15 @@ const game = {
 
     ship: [], //ship[0][0] posX   ship[0][1] posY
 
+    missile: [],
+
     gauche: false,
     droite: false,
+    espace: false,
     vitesse: 12,
     vitesseEnnemy: 2,
-    vitesseMissile: 1,
+    vitesseMissile: 12,
+
 
     init: function(){
         // C'est ici qu'on commence à coder notre jeu.
@@ -18,11 +22,15 @@ const game = {
         document.addEventListener('keydown', game.handleKeydown);
         game.ship = god.createElement("ship", 450, 555);
         //Créer ici les éléments
-        ennemy.createLigne(0, 'myth', 11);
-        ennemy.createLigne(1, 'squid', 11);
-        ennemy.createLigne(2, 'crab', 11);
-        ennemy.createLigne(3, 'space', 11);
+
+        ennemy.createLigne(0, "ghost", 1);
+
+        // ennemy.createLigne(0, 'myth', 11);
+        // ennemy.createLigne(1, 'squid', 11);
+        // ennemy.createLigne(2, 'crab', 11);
+        // ennemy.createLigne(3, 'space', 11);
         setInterval(game.handleTime, 20);
+        
     },
 
     handleTime:function(){
@@ -30,21 +38,49 @@ const game = {
         game.moveTheShip();
         game.moveEnnemy();
         game.missileShip();
+        game.handleColision();
+    },
+
+    handleColision(){
+        let posX = game.missile[0];
+        let posY = game.missile[1];
+        let ePosX = 0;
+        let ePosY = 0;
+
+        for ( let i = 0; i < game.ennemy.length; i += 1){
+            ePosX = game.ennemy[i-1][0];
+            ePosY = game.ennemy[i-1][1];
+
+            if (ePosY ){
+
+            }
+        }
+        
 
     },
 
-     missileShip: function() {
-         let missile = document.getElementsByClassName('missile')[0];
-         posXMissile = game.ship[0] + 30;
-         posYMissile = game.ship[1] - 20;
+
+    missileShip: function() {
+
+        let missile = document.getElementsByClassName('missile')[0];
+        
         if(missile == undefined) {
-            god.createElement('missile', posXMissile, posYMissile);
-        } else {
-            posYMissile -= game.vitesseMissile;
-            missile.style.top = posYMissile + "px";
-            //console.log('test');
-        }
-     },
+           
+            game.missile[0] = game.ship[0] + 30;
+            game.missile[1] = game.ship[1] - 20;
+           god.createElement('missile', game.missile[0], game.missile[1]);
+       } else {
+        
+            game.missile[1] -= game.vitesseMissile;
+            missile.style.top = game.missile[1] + "px";
+           if(game.missile[1] < 0){
+            game.missile[0] = game.ship[0] + 30;
+            game.missile[1] = game.ship[1] - 20;
+            missile.style.right = game.missile[0] + "px";
+           }
+           
+       }
+    },
 
     moveTheShip: function() {
         let unitWrapper = document.getElementsByClassName('ship')[0];
@@ -107,6 +143,9 @@ const game = {
             case 39:
             game.droite = true;
             break;
+
+            case 32:
+            game.espace = true;
         }
     },
 
@@ -119,6 +158,10 @@ const game = {
             case 39:
             game.droite = false;
             break;
+
+
+            case 32:
+            game.espace = false;
         }
     }
 };
