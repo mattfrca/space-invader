@@ -13,11 +13,15 @@
 <body>
     <div id = "wrapper">
         <h1 class ="bigTitle">space invaders</h1>
-        <div id = "panel"></div>
+            <div>
+                <h3 class ="score"></h3>
+                <div id = "panel"></div>
+            </div>
         <h2 class = "credits">by M&M</h2>
 
     
     </div>
+    <script src="../js/stars.js"></script>
     <script src="../js/ennemy.js"></script>
     <script src="../js/god.js"></script>
     <script src="../js/map.js"></script>

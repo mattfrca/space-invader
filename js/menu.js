@@ -63,13 +63,18 @@ const menu = {
         menu.fullScreen.className = "fullScreen";
         let panel = document.querySelector("#panel");
 
-        panel.appendChild(menu.fullScreen);
+        //A décommenté une fois le fullscreen mise en place
+        //panel.appendChild(menu.fullScreen);
     },
 
     fullSreenMode: function(evt){
         if(evt.keyCode === 70){
             let wrapper = document.querySelector("#wrapper");
-            wrapper.requestFullscreen();
+
+            var fullScreeRequest =  document.webkitRequestFullScreen() ||
+                                    document.oRequestFullScreen() ||
+                                    document.msRequestFullScreen();
+            document.wrapper.webkitRequestFullscreen();
             document.querySelector('#panel').removeChild(document.querySelector(".fullScreen"));
         }
     }

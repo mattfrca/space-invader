@@ -31,7 +31,7 @@ const god = {
 
                 if (unit !== "ship" && unit !== "missile"){
                     game.ennemy.push(element);
-                    unitWrapper.id = game.ennemy.length;
+                    unitWrapper.id = game.ennemy.length-1;
                 }
 
                app.panel.appendChild(unitWrapper);

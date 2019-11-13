@@ -14,8 +14,11 @@ const game = {
     vitesse: 10,
     vitesseEnnemy: 2,
     // vitesseMissile: 12,
-    vitesseMissile: 12,
+    vitesseMissile: 15,
     missileOnTravel: false,
+    pause: false,
+
+    score: 0,
 
 
     init: function(){
@@ -37,10 +40,15 @@ const game = {
 
     handleTime:function(){
         //Coeur de notre jeux
+        if(!game.pause){
         game.moveTheShip();
         game.moveEnnemy();
         game.missileShip();
         game.handleColision();
+        game.handleScore();
+        game.allEnnemyKill();
+        stars.handleStars();
+        }
     },
 
 
@@ -52,7 +60,7 @@ const game = {
         
         for ( let i = 0; i < game.ennemy.length; i += 1){
 
-           // if(document.getElementById(i) != null){
+           if(document.getElementById(i) != null){
 
                 ePosX = game.ennemy[i][0];
                 ePosY = game.ennemy[i][1];
@@ -67,13 +75,13 @@ const game = {
                     
                     if(posX + 5 > ePosX && posX < ePosX + width){
 
-                        
-                        app.panel.removeChild(document.getElementById(i+1));
+                        game.score +=50;
+                        app.panel.removeChild(document.getElementById(i));
                         app.panel.removeChild(document.getElementsByClassName('missile')[0]);
 
                     }
                 }
-            //}
+            }
         }
         
 
@@ -127,45 +135,72 @@ const game = {
     },
 
     moveEnnemy:function(){
-        let posXMax = 0;
-        let posXMin = 900;
+        let posXMax = -100;
+        let posXMin = 1000;
 
-        for(var i = 1; i < game.ennemy.length +1; i+=1){
+        for(var i = 0; i < game.ennemy.length; i+=1){
             
             let unit = document.getElementById(i);
 
             if(unit){
-              game.ennemy[i-1][0] += game.vitesseEnnemy;
-              unit.style.right = game.ennemy[i-1][0] + "px";
+              game.ennemy[i][0] += game.vitesseEnnemy;
+              unit.style.right = game.ennemy[i][0] + "px";
 
-              if(posXMax < game.ennemy[i-1][0]){
-                  posXMax = game.ennemy[i-1][0];
+              if(posXMax < game.ennemy[i][0]){
+                  posXMax = game.ennemy[i][0];
               }
 
-              if(posXMin > game.ennemy[i-1][0]){
-                  posXMin = game.ennemy[i-1][0];
+              if(posXMin > game.ennemy[i][0]){
+                  posXMin = game.ennemy[i][0];
               }
             }
         }
-
+    
         if(posXMin < 15){
             game.vitesseEnnemy *=-1;
 
-            for(var i = 1; i < game.ennemy.length +1; i+=1){
+            for(var i = 0; i < game.ennemy.length; i+=1){
                     let unit = document.getElementById(i);
-                    game.ennemy[i-1][1] += 10;
-                    unit.style.top = game.ennemy[i-1][1] + "px";
+
+                    if(unit){
+                        game.ennemy[i][1] += 10;
+                        unit.style.top = game.ennemy[i][1] + "px";
+                    }
             }
           }
 
           if(posXMax > 820){
             game.vitesseEnnemy *=-1;
-            for(var i = 1; i < game.ennemy.length +1; i+=1){
+            for(var i = 0; i < game.ennemy.length; i+=1){
                 let unit = document.getElementById(i);
-                game.ennemy[i-1][1] += 10;
-                unit.style.top = game.ennemy[i-1][1] + "px";
+                if(unit){
+                    game.ennemy[i][1] += 10;
+                    unit.style.top = game.ennemy[i][1] + "px";
+                }
             }
           }
+    },
+
+    allEnnemyKill:function(){
+        let ennemiCompte = game.ennemy.length;
+        for(var i = 0; i < game.ennemy.length; i +=1 ){
+            if(!document.getElementById(i)){
+                ennemiCompte -=1;
+            }
+        }
+
+        if(ennemiCompte == 0){
+            game.pause = true;
+        }
+
+    },
+
+    handleScore: function(){
+        game.score -=1;
+        if(game.score <0){
+            game.score = 0;
+        }
+        document.querySelector(".score").textContent = game.score;
     },
 
     handleKeydown: function(evt){
@@ -180,6 +215,14 @@ const game = {
 
             case 32:
             game.espace = true;
+            break;
+
+            case 80:
+            if(game.pause){
+            game.pause = false;
+            }else{
+                game.pause = true;
+            }
         }
     },
 

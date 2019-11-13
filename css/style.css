@@ -1,3 +1,7 @@
+html{
+    -webkit-;
+}
+
 #wrapper{
     background: linear-gradient(#000000, #00010F);
     width: 100vw;
@@ -15,7 +19,7 @@
     border-radius: 5px;
     width: 900px;
     height: 600px;
-    background-color: black;
+    background-color: rgb(0, 0, 24);
     resize: none;
     position: relative;
 }
@@ -26,6 +30,7 @@
 }
 
 .bigTitle{
+
     color: black;
     font-size: 4em;
     text-transform: uppercase;
@@ -33,6 +38,7 @@
 }
 
 .credits{
+    
     color: black;
     font-size: 1em;
     text-transform: uppercase;
@@ -52,6 +58,41 @@
     animation-play-state: running;
 
 
+}
+
+.starYellow{
+    background-color: rgb(255, 255, 130);
+    height: 1px;
+    width: 1px;
+    position: absolute;
+}
+
+.starWhite{
+    background-color: white;
+    height: 1px;
+    width: 1px;
+    position: absolute;
+}
+
+.starBlue{
+    background-color: rgb(0, 0, 95);
+    height: 1px;
+    width: 1px;
+    position: absolute;
+}
+
+.starRed{
+    background-color: rgb(255, 86, 86);
+    height: 1px;
+    width: 1px;
+    position: absolute;
+}
+
+.score{
+    font-family: 'Open Sans', sans-serif;
+    color:white;
+    align-self: flex-start;
+    font-size: 1.5em;
 }
 
 @keyframes shadowSize{
@@ -85,7 +126,7 @@
 }
 
 .empty{
-    background-color: black;
+    background-color: rgb(0, 0, 24);
 }
 
 .plain{
