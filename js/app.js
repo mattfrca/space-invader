@@ -1,8 +1,20 @@
 const app = {
 
+    panel: document.querySelector('#panel'),
+    pixel: 5,
+
     init: function(){
-        console.log("app.init");
+        //On lance le menu
+        //menu.init();
+
+        //A SUPRIMER:
+        app.startGame();
     },
+
+    startGame:function(){
+        console.log("Lancement du jeu");
+        game.init();
+    }
 
 };
 
