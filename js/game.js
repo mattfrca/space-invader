@@ -14,19 +14,25 @@ const game = {
         // C'est ici qu'on commence à coder notre jeu.
         document.addEventListener('keyup', game.handleKeyUp);
         document.addEventListener('keydown', game.handleKeydown);
-        game.ship = god.createElement("ship", 450, 500);
+        game.ship = god.createElement("ship", 450, 555);
         //Créer ici les éléments
-        ennemy.createLigne(0, 'myth', 7);
-        ennemy.createLigne(1, 'squid', 7);
-        ennemy.createLigne(2, 'crab', 7);
-        ennemy.createLigne(3, 'space', 7);
+        ennemy.createLigne(0, 'myth', 11);
+        ennemy.createLigne(1, 'squid', 11);
+        ennemy.createLigne(2, 'crab', 11);
+        ennemy.createLigne(3, 'space', 11);
         setInterval(game.handleTime, 20);
     },
 
     handleTime:function(){
         //Coeur de notre jeux
         game.moveTheShip();
+        game.moveEnnemy();
+        game.missileShip();
 
+    },
+
+    missileShip: function() {
+        god.createElement('missile', game.ship[0] + 25, game.ship[1]-20);
     },
 
     moveTheShip: function() {
@@ -34,14 +40,22 @@ const game = {
         if(game.droite && game.ship[0] >= 10){
             app.panel.removeChild(unitWrapper);
             game.ship[0] -= this.vitesse;
-            god.createElement("ship", game.ship[0], 500);
+            god.createElement("ship", game.ship[0], 555);
         }
         if(game.gauche && game.ship[0] <= 830){
             app.panel.removeChild(unitWrapper);
             game.ship[0] += this.vitesse;
-            god.createElement("ship", game.ship[0], 500);
+            god.createElement("ship", game.ship[0], 555);
         }
         
+    },
+
+    moveEnnemy:function(){
+
+        // for(var i = 1; i < game.ennemy.length +1; i+=1){
+        //      let unit = document.getElementById(i);
+        //      app.panel.removeChild(unit);
+        // }
     },
 
     handleKeydown: function(evt){

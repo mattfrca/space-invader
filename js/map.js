@@ -1,5 +1,10 @@
 var map = {
   models: {
+    missile: [
+      'x',
+      'x',
+      '8',
+    ],
     squid: [
       '---------',
       '--xxxxx--',

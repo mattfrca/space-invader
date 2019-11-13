@@ -4,7 +4,7 @@ const god = {
     createElement: function(unit, posX, posY){
         //Créer un élément et renvoi un array avec sa posX, posY, width et height
 
-        let element= [];
+        let element = [posX, posY, unit];
 
         for (model in map.models){
             if (model === unit){
@@ -29,14 +29,19 @@ const god = {
                     }
                 }
 
+                if (unit !== "ship"){
+                    game.ennemy.push(element);
+                    unitWrapper.id = game.ennemy.length;
+                }
 
                app.panel.appendChild(unitWrapper);
             }
         }
 
-        element = [posX, posY, unit];
-
+        
         return element;
+        
+
     },
 
     createModel: function(unit){

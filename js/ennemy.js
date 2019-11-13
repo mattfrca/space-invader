@@ -2,10 +2,8 @@ const ennemy = {
 
     createLigne: function(numLigne, unit, nbrElement){
 
-        console.log("test");
-
-        let posX = 80;
-        let posY = 50;
+        let posX = 40;
+        let posY = 10;
         posY += 55 * numLigne;
 
         for (var i = 0; i < nbrElement; i += 1){
