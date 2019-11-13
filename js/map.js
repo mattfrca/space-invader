@@ -80,7 +80,7 @@ var map = {
   },
   types: {
     '-': 'empty',
-    'x': 'plain',
+    'c': 'plain',
     'o': 'light',
     '8': 'highlight',
   }

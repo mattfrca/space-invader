@@ -18,6 +18,7 @@
 
     
     </div>
+    <script src="../js/ennemy.js"></script>
     <script src="../js/god.js"></script>
     <script src="../js/map.js"></script>
     <script src="../js/menu.js"></script>
