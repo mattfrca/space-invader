@@ -9,7 +9,7 @@ const ennemy = {
         for (var i = 0; i < nbrElement; i += 1){
             god.createElement(unit, posX, posY);
 
-            posX += 70;
+            posX += 85;
         }
 
     },

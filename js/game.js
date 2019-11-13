@@ -11,9 +11,11 @@ const game = {
     gauche: false,
     droite: false,
     espace: false,
-    vitesse: 12,
+    vitesse: 10,
     vitesseEnnemy: 2,
+    // vitesseMissile: 12,
     vitesseMissile: 12,
+    missileOnTravel: false,
 
 
     init: function(){
@@ -23,12 +25,12 @@ const game = {
         game.ship = god.createElement("ship", 450, 555);
         //Créer ici les éléments
 
-        ennemy.createLigne(0, "ghost", 1);
+        ennemy.createLigne(0, "myth", 1);
 
-        // ennemy.createLigne(0, 'myth', 11);
-        // ennemy.createLigne(1, 'squid', 11);
-        // ennemy.createLigne(2, 'crab', 11);
-        // ennemy.createLigne(3, 'space', 11);
+        ennemy.createLigne(0, 'myth', 9);
+        ennemy.createLigne(1, 'squid', 9);
+        ennemy.createLigne(2, 'crab', 9);
+        ennemy.createLigne(3, 'space', 9);
         setInterval(game.handleTime, 20);
         
     },
@@ -41,19 +43,37 @@ const game = {
         game.handleColision();
     },
 
+
     handleColision(){
         let posX = game.missile[0];
         let posY = game.missile[1];
         let ePosX = 0;
         let ePosY = 0;
-
+        
         for ( let i = 0; i < game.ennemy.length; i += 1){
-            ePosX = game.ennemy[i-1][0];
-            ePosY = game.ennemy[i-1][1];
 
-            if (ePosY ){
+           // if(document.getElementById(i) != null){
 
-            }
+                ePosX = game.ennemy[i][0];
+                ePosY = game.ennemy[i][1];
+
+
+                // console.log("ePosY= " + ePosY);
+                // console.log("posYMissile" + posY);
+                let width = god.modelWidth(game.ennemy[i][2]) * app.pixel;
+                let height = god.modelHeight(game.ennemy[i][2]) * app.pixel;
+
+                if (posY < ePosY + height && posY > ePosY){
+                    
+                    if(posX + 5 > ePosX && posX < ePosX + width){
+
+                        
+                        app.panel.removeChild(document.getElementById(i+1));
+                        app.panel.removeChild(document.getElementsByClassName('missile')[0]);
+
+                    }
+                }
+            //}
         }
         
 
@@ -64,21 +84,31 @@ const game = {
 
         let missile = document.getElementsByClassName('missile')[0];
         
-        if(missile == undefined) {
+        if(missile == undefined ) {
            
             game.missile[0] = game.ship[0] + 30;
             game.missile[1] = game.ship[1] - 20;
-           god.createElement('missile', game.missile[0], game.missile[1]);
+            god.createElement('missile', game.missile[0], game.missile[1]);
+            game.missileOnTravel = true;
        } else {
         
-            game.missile[1] -= game.vitesseMissile;
-            missile.style.top = game.missile[1] + "px";
-           if(game.missile[1] < 0){
-            game.missile[0] = game.ship[0] + 30;
-            game.missile[1] = game.ship[1] - 20;
-            missile.style.right = game.missile[0] + "px";
-           }
-           
+            if(!game.missileOnTravel){
+                missile.style.right = game.missile[0] + "px";
+                missile.style.top = game.missile[1] + "px";
+                game.missileOnTravel = true;
+            
+            }else{
+
+                game.missile[1] -= game.vitesseMissile;
+                missile.style.top = game.missile[1] + "px";
+
+                if(game.missile[1] < 0){//Si le missile sort du panel
+                    game.missile[0] = game.ship[0] + 30;
+                    game.missile[1] = game.ship[1] - 20;
+                    
+                    game.missileOnTravel = false;
+                }
+            }   
        }
     },
 
@@ -101,7 +131,10 @@ const game = {
         let posXMin = 900;
 
         for(var i = 1; i < game.ennemy.length +1; i+=1){
-              let unit = document.getElementById(i);
+            
+            let unit = document.getElementById(i);
+
+            if(unit){
               game.ennemy[i-1][0] += game.vitesseEnnemy;
               unit.style.right = game.ennemy[i-1][0] + "px";
 
@@ -112,6 +145,7 @@ const game = {
               if(posXMin > game.ennemy[i-1][0]){
                   posXMin = game.ennemy[i-1][0];
               }
+            }
         }
 
         if(posXMin < 15){
