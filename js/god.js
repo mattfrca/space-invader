@@ -15,20 +15,32 @@ const god = {
                 unitWrapper.style.right = posX + "px";
                 unitWrapper.style.top = posY + "px ";
 
-                god.createModel(unit);
+                for(var i = 0; i < map.models[unit].length; i += 1){
+
+                    let rowSplit = map.models[unit][i].split("");
+        
+                    for (var j = 0; j < rowSplit.length; j+=1){
+                        let pixelUnit = document.createElement("div");
+                        pixelUnit.className = "pixel " + map.types[rowSplit[j]];
+                        pixelUnit.style.width = app.pixel + 'px';
+                        pixelUnit.style.height = app.pixel + 'px';
+                        
+                        unitWrapper.appendChild(pixelUnit);
+                    }
+                }
 
 
                app.panel.appendChild(unitWrapper);
             }
         }
 
-
+        element = [unit, posX, posY];
 
         return element;
     },
 
     createModel: function(unit){
-
+        
     },
 
     modelWidth: function(element){

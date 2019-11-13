@@ -54,6 +54,20 @@
 
 }
 
+@keyframes shadowSize{
+    0%{
+        
+        text-shadow: rgb(124, 124, 124) 1px 0px 0px, rgb(124, 124, 124) 0.540302px 0.841471px 0px, rgb(124, 124, 124) -0.416147px 0.909297px 0px, rgb(124, 124, 124) -0.989993px 0.14112px 0px, rgb(124, 124, 124) -0.653644px -0.756803px 0px, rgb(124, 124, 124) 0.283662px -0.958924px 0px, rgb(124, 124, 124) 0.96017px -0.279416px 0px;    font-weight: bold;
+    }
+
+    50%{
+        text-shadow: rgb(182, 182, 182) 2px 0px 0px, rgb(182, 182, 182) 1.75517px 0.958851px 0px, rgb(182, 182, 182) 1.0806px 1.68294px 0px, rgb(182, 182, 182) 0.141474px 1.99499px 0px, rgb(182, 182, 182) -0.832294px 1.81859px 0px, rgb(182, 182, 182) -1.60229px 1.19694px 0px, rgb(182, 182, 182) -1.97999px 0.28224px 0px, rgb(182, 182, 182) -1.87291px -0.701566px 0px, rgb(182, 182, 182) -1.30729px -1.51361px 0px, rgb(182, 182, 182) -0.421592px -1.95506px 0px, rgb(182, 182, 182) 0.567324px -1.91785px 0px, rgb(182, 182, 182) 1.41734px -1.41108px 0px, rgb(182, 182, 182) 1.92034px -0.558831px 0px;
+    }
+    100%{
+        text-shadow: rgb(124, 124, 124) 1px 0px 0px, rgb(124, 124, 124) 0.540302px 0.841471px 0px, rgb(124, 124, 124) -0.416147px 0.909297px 0px, rgb(124, 124, 124) -0.989993px 0.14112px 0px, rgb(124, 124, 124) -0.653644px -0.756803px 0px, rgb(124, 124, 124) 0.283662px -0.958924px 0px, rgb(124, 124, 124) 0.96017px -0.279416px 0px;    font-weight: bold;
+    }
+}
+
 .fullScreen{
     color: white;
     text-align: center;
@@ -70,16 +84,21 @@
     flex-wrap: wrap;
 }
 
-@keyframes shadowSize{
-    0%{
-        
-        text-shadow: rgb(124, 124, 124) 1px 0px 0px, rgb(124, 124, 124) 0.540302px 0.841471px 0px, rgb(124, 124, 124) -0.416147px 0.909297px 0px, rgb(124, 124, 124) -0.989993px 0.14112px 0px, rgb(124, 124, 124) -0.653644px -0.756803px 0px, rgb(124, 124, 124) 0.283662px -0.958924px 0px, rgb(124, 124, 124) 0.96017px -0.279416px 0px;    font-weight: bold;
-    }
+.empty{
+    background-color: black;
+}
 
-    50%{
-        text-shadow: rgb(182, 182, 182) 2px 0px 0px, rgb(182, 182, 182) 1.75517px 0.958851px 0px, rgb(182, 182, 182) 1.0806px 1.68294px 0px, rgb(182, 182, 182) 0.141474px 1.99499px 0px, rgb(182, 182, 182) -0.832294px 1.81859px 0px, rgb(182, 182, 182) -1.60229px 1.19694px 0px, rgb(182, 182, 182) -1.97999px 0.28224px 0px, rgb(182, 182, 182) -1.87291px -0.701566px 0px, rgb(182, 182, 182) -1.30729px -1.51361px 0px, rgb(182, 182, 182) -0.421592px -1.95506px 0px, rgb(182, 182, 182) 0.567324px -1.91785px 0px, rgb(182, 182, 182) 1.41734px -1.41108px 0px, rgb(182, 182, 182) 1.92034px -0.558831px 0px;
-    }
-    100%{
-        text-shadow: rgb(124, 124, 124) 1px 0px 0px, rgb(124, 124, 124) 0.540302px 0.841471px 0px, rgb(124, 124, 124) -0.416147px 0.909297px 0px, rgb(124, 124, 124) -0.989993px 0.14112px 0px, rgb(124, 124, 124) -0.653644px -0.756803px 0px, rgb(124, 124, 124) 0.283662px -0.958924px 0px, rgb(124, 124, 124) 0.96017px -0.279416px 0px;    font-weight: bold;
-    }
+.plain{
+    background-color: white;
+
+}
+
+.light{
+    background-color: orange;
+
+}
+
+.highlight{
+    background-color: yellow;
+
 }
