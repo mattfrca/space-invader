@@ -10,6 +10,7 @@ const game = {
     droite: false,
     vitesse: 12,
     vitesseEnnemy: 2,
+    vitesseMissile: 1,
 
     init: function(){
         // C'est ici qu'on commence à coder notre jeu.
@@ -28,15 +29,21 @@ const game = {
         //Coeur de notre jeux
         game.moveTheShip();
         game.moveEnnemy();
-         game.missileShip();
+        game.missileShip();
 
     },
 
      missileShip: function() {
          let missile = document.getElementsByClassName('missile')[0];
-         posXMissile = game.ship[0];
-         posYMissile = game.ship[1];
-         god.createElement('missile', posXMissile + 30, posYMissile - 20);
+         posXMissile = game.ship[0] + 30;
+         posYMissile = game.ship[1] - 20;
+        if(missile == undefined) {
+            god.createElement('missile', posXMissile, posYMissile);
+        } else {
+            posYMissile -= game.vitesseMissile;
+            missile.style.top = posYMissile + "px";
+            //console.log('test');
+        }
      },
 
     moveTheShip: function() {
