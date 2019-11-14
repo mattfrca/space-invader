@@ -84,31 +84,42 @@ const game = {
 
 
     handleColision(){
+        //Gestion des collision du missile
+
+        //on récupére la position du missile
         let posX = game.missile[0];
         let posY = game.missile[1];
+
+        //on initialise les variables qui accueillerons la position de nos ennemis
         let ePosX = 0;
         let ePosY = 0;
         
         for ( let i = 0; i < game.ennemy.length; i += 1){
 
            if(document.getElementById(i) != null){
+               //Pour chaque ennemis encore vivant:
 
+
+                //On récupère la position de l'ennemi
                 ePosX = game.ennemy[i][0];
                 ePosY = game.ennemy[i][1];
 
-
-                // console.log("ePosY= " + ePosY);
-                // console.log("posYMissile" + posY);
+                //On récupère la hauteur et la largeur de l'ennemi
                 let width = god.modelWidth(game.ennemy[i][2]) * app.pixel;
                 let height = god.modelHeight(game.ennemy[i][2]) * app.pixel;
 
+                //Si Y missile < Y ennemy + sa hauteur && Y missile > Y ennemy
                 if (posY < ePosY + height && posY > ePosY){
                     
-                    if(posX + 5 > ePosX && posX < ePosX + width){
+                    //Si X missile + son epaisseur > X ennemy && X missile < X ennemy + sa largeur
+                    if(posX + app.pixel > ePosX && posX < ePosX + width){
 
+                        // Si on arrive jusque ici c'est que le missile a toucher un monstre
                         game.score +=50;
+                        //On ajoute 50 points au score
                         app.panel.removeChild(document.getElementById(i));
                         app.panel.removeChild(document.getElementsByClassName('missile')[0]);
+                        //On suprime alors l'ennemi touché mais également le missile lui même.
 
                     }
                 }
@@ -121,8 +132,11 @@ const game = {
 
     missileShip: function() {
 
+        // Ici on gère la création du missile et son déplacement.
+
         let missile = document.getElementsByClassName('missile')[0];
         
+        //Si le missile n'existe pas, alors on le créé.
         if(missile == undefined ) {
            
             game.missile[0] = game.ship[0] + 30;
@@ -152,6 +166,11 @@ const game = {
     },
 
     moveTheShip: function() {
+
+        //Ici on gère le déplacement de notre vaisseau
+        //On agit en fonction de game.droite et game.gauche.
+        //On veut également empécher le déplacement si le vaisseau est au bord du panel. (D'ou le 10 et 830)
+
         let unitWrapper = document.getElementsByClassName('ship')[0];
         if(game.droite && game.ship[0] >= 10){
             game.ship[0] -= game.vitesse;
@@ -166,17 +185,22 @@ const game = {
     },
 
     moveEnnemy:function(){
+
+        //Gestion des mouvement de l'ennemie
+
         let posXMax = -100;
         let posXMin = 1000;
 
         for(var i = 0; i < game.ennemy.length; i+=1){
-            
+            //Pour chaque ennemie présent
             let unit = document.getElementById(i);
 
-            if(unit){
+            if(unit){//Si l'ennemi est encore présent sur le panel
+
               game.ennemy[i][0] += game.vitesseEnnemy;
               unit.style.right = game.ennemy[i][0] + "px";
 
+              // Ici on récupère la position en X de l'ennemi le plus proche de la droite et la position de celui qui est le plus proche de la gauche
               if(posXMax < game.ennemy[i][0]){
                   posXMax = game.ennemy[i][0];
               }
@@ -187,6 +211,10 @@ const game = {
             }
         }
     
+        //Si le monstre qui est le plus proche de la droite est plus petite que 15
+        //On inverse sa vitesse.
+        // Du coup si il se déplacais de 10px vers la droite il se déplacera ensuite de -10 pixel vers la droite.
+        // Du coup -10 pixel vers la droite, c'est un déplacement de 10 pixel vers la gauche ;)
         if(posXMin < 15){
             game.vitesseEnnemy *=-1;
 
@@ -200,6 +228,7 @@ const game = {
             }
           }
 
+          //On fait strictement l'inverse pour l'autre côté
           if(posXMax > 820){
             game.vitesseEnnemy *=-1;
             for(var i = 0; i < game.ennemy.length; i+=1){
@@ -213,6 +242,8 @@ const game = {
     },
 
     allEnnemyKill:function(){
+        //On vérifi si il reste des ennemis vivants
+
         let ennemiCompte = game.ennemy.length;
         for(var i = 0; i < game.ennemy.length; i +=1 ){
             if(!document.getElementById(i)){
@@ -221,12 +252,14 @@ const game = {
         }
 
         if(ennemiCompte == 0){
+            //Si ils sont tous mort, on met le jeu en pause
             game.pause = true;
         }
 
     },
 
     handleScore: function(){
+        //Toutes les 20ms le joueur perd 1 point
         game.score -=1;
         if(game.score <0){
             game.score = 0;
@@ -235,6 +268,7 @@ const game = {
     },
 
     handleKeydown: function(evt){
+
         switch(evt.keyCode){
             case 37:
             game.gauche = true;
@@ -258,6 +292,7 @@ const game = {
     },
 
     handleKeyUp: function(evt){
+        
         switch(evt.keyCode){
             case 37:
             game.gauche = false;
