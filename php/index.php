@@ -21,6 +21,11 @@
 
     
     </div>
+
+    <?php
+    // Ici, on charge tout nos scripts. Pour commencer la visite, lancer tout d'abord app.js
+    ?>
+
     <script src="../js/stars.js"></script>
     <script src="../js/ennemy.js"></script>
     <script src="../js/god.js"></script>

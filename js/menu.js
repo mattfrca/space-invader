@@ -1,3 +1,5 @@
+//VOici le menu de notre jeux
+
 const menu = {
 
     startTitleSize: 2,
@@ -9,12 +11,14 @@ const menu = {
     fullScreen: "",
 
     init: function(){
-        
-        document.addEventListener("keyup", menu.fullSreenMode);
-        document.addEventListener("keyup", menu.handleStartMenu);
-        menu.creationPressEnter();
-        menu.creationFullScreen();
+        //Tout d'abord, on créer les Listener:
+        // keyup écoute le moment ou l'utilisateur relache une touche
 
+        document.addEventListener("keyup", menu.handleStartMenu);
+        menu.creationPressEnter(); //ici on crée le texte PRESS ENTER
+        
+        //La gestion de la touche entré se fait dans handleStartMenu.
+        //Lorsque l'utilisateur apuis sur entré, on lance une petite annimation dans titleEndAnimation
     },
 
     creationPressEnter: function(){
@@ -54,29 +58,9 @@ const menu = {
             }
             clearInterval(menu.interval);
             app.startGame();
+            //Une fois l'animation terminé, on lance app.starGame();
+            //RDV sur app.js ligne 14
         }
     },
-
-    creationFullScreen:function(){
-        menu.fullScreen = document.createElement('p');
-        menu.fullScreen.textContent = "press -f- for full-screen mode";
-        menu.fullScreen.className = "fullScreen";
-        let panel = document.querySelector("#panel");
-
-        //A décommenté une fois le fullscreen mise en place
-        //panel.appendChild(menu.fullScreen);
-    },
-
-    fullSreenMode: function(evt){
-        if(evt.keyCode === 70){
-            let wrapper = document.querySelector("#wrapper");
-
-            var fullScreeRequest =  document.webkitRequestFullScreen() ||
-                                    document.oRequestFullScreen() ||
-                                    document.msRequestFullScreen();
-            document.wrapper.webkitRequestFullscreen();
-            document.querySelector('#panel').removeChild(document.querySelector(".fullScreen"));
-        }
-    }
 
 }

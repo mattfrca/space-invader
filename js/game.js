@@ -1,45 +1,76 @@
+//On y est! Voici le coeur de notre spaceInvader.
+
 const game = {
 
+    //Ici, on a un tableau qui stoque tous les ennemis présent et détruit.
+    ennemy: [],
+    //ennemy[i][x]
+    // i = représente l'id d'un ennemi
+    // x est un tableau qui contient 3 valeur:
+    // x => 0 = position X
+    // x => 1 = position Y
+    // x => 2 = type de l'unité 
 
-    ennemy: [], //ennemy[0][0] => posX de l'ennemi 1 
 
+    ship: [], //ship[0] posX   ship[1] posY 
 
-    ship: [], //ship[0][0] posX   ship[0][1] posY
+    missile: [], // missile [0] posX missile [1] posY
 
-    missile: [],
-
+    // Gauche/Droite/Espace sont par défaut = false.
+    // Il passe à true lorsque le joueur appui sur une touche et retourne à false lorsque le joueur relache la touche.
     gauche: false,
     droite: false,
     espace: false,
+
+    //Vitesse représente la vitesse de notre vaisseau
     vitesse: 10,
     vitesseEnnemy: 2,
-    // vitesseMissile: 12,
     vitesseMissile: 15,
+
+    //MissileOnTravel est false lorsqu'aucun missile n'est à l'écran
     missileOnTravel: false,
+
+    // pause.... bah c'est la pause.
     pause: false,
 
+    // score représente.... euh.... au hasard: le score ?
     score: 0,
 
 
     init: function(){
-        // C'est ici qu'on commence à coder notre jeu.
         document.addEventListener('keyup', game.handleKeyUp);
         document.addEventListener('keydown', game.handleKeydown);
+
+        //On créé notre vaisseau
         game.ship = god.createElement("ship", 450, 555);
-        //Créer ici les éléments
-
-        ennemy.createLigne(0, "myth", 1);
-
+        
+        //On appel la fonction createLigne qui elle même appel la fonction god.createElement qui s'occupe de créer chaque ennemy dans une ligne
+        // argument 1 = numéro de la ligne
+        // argument 2 = type d'unité qu'on veu créer
+        // arguement 3 = nombre d'ennemi qu'on veut dans la ligne
         ennemy.createLigne(0, 'myth', 9);
         ennemy.createLigne(1, 'squid', 9);
         ennemy.createLigne(2, 'crab', 9);
         ennemy.createLigne(3, 'space', 9);
+
+        //Initialisation de l'intervat toute les 20 miliSecondes
         setInterval(game.handleTime, 20);
         
     },
 
     handleTime:function(){
-        //Coeur de notre jeux
+        //Coeur de notre jeu
+        // Cette fonction est lancer toutes les 20 milisecondes.
+
+        //Si le jeux n'est pas en pause:
+        // On s'occupe d'abord de la gestion des mouvement de notre vaisseau
+        // ensuite on s'occupe de la gestion des mouvement de nos ennemis
+        // puis les mouvement de notre missile.
+        // Un fois que tout les mouvement on été fait, on regarde si notre missile n'entre pas en collision avec un ennemi
+        // En s'occupe de la maj de notre score
+        // On vérifie si il existe encore des ennemy vivant
+        // On s'occupe de la gestion des étoiles qui file en arrière plan.
+
         if(!game.pause){
         game.moveTheShip();
         game.moveEnnemy();
